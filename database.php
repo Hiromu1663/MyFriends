@@ -39,6 +39,13 @@ function find($id) {
   return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+// 友達情報更新処理
+function update($input) {
+  $dbh = $this->connect();
+  $stmt = $dbh->prepare("UPDATE users SET name = ?, email = ? WHERE id = ?");
+  $stmt->execute([$input["name"], $input["email"], $input["id"]]);
+}
+
 }
 
 ?>

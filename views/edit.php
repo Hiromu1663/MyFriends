@@ -1,6 +1,20 @@
 <?php
 require_once("../database.php");
 
+if(!empty($_POST)) {
+    $input = $_POST;
+    $input["id"] = $_GET["id"];
+
+        if(empty($input["name"])) {
+            exit("名前を入力してください");
+        }
+        if(empty($input["email"])) {
+            exit("メールアドレスを入力してください"); 
+        }     
+        $database = new Database();
+        $database->update($input);
+}
+
 $database = new Database();
 $friend = $database->find((int)$_GET["id"]);
 var_dump($friend);
@@ -47,7 +61,7 @@ if (empty($friend)) {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>1</td>
+                            <td><?php echo $friend[0]["id"]; ?></td>
                             <td><input type="text" name="name" value="<?php echo $friend[0]["name"]; ?>"></td>
                             <td><input type="text" name="email" value="<?php echo $friend[0]["email"]; ?>"></td>
                             <td><button type="submit" class="btn btn-success btn-sm">更新</button></td>

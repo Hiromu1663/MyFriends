@@ -22,6 +22,23 @@ class Database {
     $stmt = $dbh->prepare("INSERT INTO users SET name = ?, email = ?");
     $stmt->execute([$input["name"], $input["email"]]);
   }
+
+// 友達全員取得
+function all() {
+  $dbh = $this->connect();
+  $stmt = $dbh->prepare("SELECT*FROM users");
+  $stmt->execute();
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// 友達１人を取得
+function find($id) {
+  $dbh = $this->connect();
+  $stmt = $dbh->prepare("SELECT*FROM users WHERE id = ?");
+  $stmt->execute([$id]);
+  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }
 
 ?>

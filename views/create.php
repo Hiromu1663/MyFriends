@@ -13,6 +13,7 @@ if(!empty($_POST)) {
     $database->store($_POST);
 
     header("Location: ./index.php");
+    exit;
 }
 ?>
 

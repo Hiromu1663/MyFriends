@@ -1,3 +1,18 @@
+<?php
+require_once("../database.php");
+
+$database = new Database();
+$friend = $database->find((int)$_GET["id"]);
+var_dump($friend);
+
+if (empty($friend)) {
+    header("Location: ./index.php");
+    exit;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +25,10 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- ヘッダー -->
+   
     <?php include('./header.php'); ?>
 
-    <!-- コンテンツ -->
+   
     <main class="py-5">
         <div class="container">
             <div class="row">
@@ -33,8 +48,8 @@
                     <tbody>
                         <tr>
                             <td>1</td>
-                            <td><input type="text" name="name" value="田中"></td>
-                            <td><input type="text" name="email" value="test@gmail.com"></td>
+                            <td><input type="text" name="name" value="<?php echo $friend[0]["name"]; ?>"></td>
+                            <td><input type="text" name="email" value="<?php echo $friend[0]["email"]; ?>"></td>
                             <td><button type="submit" class="btn btn-success btn-sm">更新</button></td>
                         </tr>
                     </tbody>
@@ -43,7 +58,7 @@
         </div>
     </main>
 
-    <!-- フッター -->
+    
     <?php include('./footer.php'); ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

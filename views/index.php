@@ -1,5 +1,18 @@
+<?php
+require_once("../database.php");
+// アクセスの度に実行する
+$database = new Database();
+$friends = $database->all();
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +21,7 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
+
 <body class="d-flex flex-column min-vh-100">
 
     <!-- ヘッダー -->
@@ -30,20 +44,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>田中</td>
-                        <td>test@gmail.com</td>
-                        <td><a href="./edit.php?id=1" class="btn btn-warning btn-sm">編集</a></td>
-                        <td><a href="./index.php?id=1" class="btn btn-danger btn-sm">削除</a></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>山田</td>
-                        <td>example@gmail.com</td>
-                        <td><a href="./edit.php?id=2" class="btn btn-warning btn-sm">編集</a></td>
-                        <td><a href="./index.php?id=2" class="btn btn-danger btn-sm">削除</a></td>
-                    </tr>
+                    <?php foreach ($friends as $friend) : ?>
+                        <tr>
+                            <td><?php echo $friend["id"]; ?></td>
+                            <td><?php echo $friend["name"]; ?></td>
+                            <td><?php echo $friend["email"]; ?></td>
+                            <td><a href="./edit.php?id=<?php echo $friend["id"]; ?>" class="btn btn-warning btn-sm">編集</a></td>
+                            <td><a href="./index.php?id=1" class="btn btn-danger btn-sm">削除</a></td>
+                        </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
         </div>
@@ -54,4 +63,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 </body>
+
 </html>

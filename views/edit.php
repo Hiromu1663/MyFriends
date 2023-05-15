@@ -13,6 +13,8 @@ if(!empty($_POST)) {
         }     
         $database = new Database();
         $database->update($input);
+
+        header("Location: ./index.php");
 }
 
 $database = new Database();

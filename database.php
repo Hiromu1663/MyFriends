@@ -46,6 +46,12 @@ function update($input) {
   $stmt->execute([$input["name"], $input["email"], $input["id"]]);
 }
 
+function destroy($id) {
+  $dbh = $this->connect();
+  $stmt = $dbh->prepare("DELETE FROM users WHERE id = ?");
+  $stmt->execute([$id]);
+}
+
 }
 
 ?>

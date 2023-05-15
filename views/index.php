@@ -1,5 +1,13 @@
 <?php
 require_once("../database.php");
+
+// 削除処理
+if(!empty($_GET) && isset($_GET["id"])) {
+    $database = new Database();
+    $database->destroy((int)$_GET["id"]);
+}
+
+
 // アクセスの度に実行する
 $database = new Database();
 $friends = $database->all();
@@ -50,7 +58,7 @@ $friends = $database->all();
                             <td><?php echo $friend["name"]; ?></td>
                             <td><?php echo $friend["email"]; ?></td>
                             <td><a href="./edit.php?id=<?php echo $friend["id"]; ?>" class="btn btn-warning btn-sm">編集</a></td>
-                            <td><a href="./index.php?id=1" class="btn btn-danger btn-sm">削除</a></td>
+                            <td><a href="./index.php?id=<?php echo $friend["id"]; ?>" class="btn btn-danger btn-sm">削除</a></td>
                         </tr>
                     <?php endforeach ?>
                 </tbody>
